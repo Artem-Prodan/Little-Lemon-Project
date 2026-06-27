@@ -1,0 +1,110 @@
+/* =========================
+   CSS Reset
+========================= */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* =========================
+   Design Tokens
+========================= */
+
+:root {
+  /* Brand */
+
+  --color-primary: #495e57;
+  --color-primary-dark: #3d4f49;
+  --color-secondary: #f4ce14;
+
+  /* Neutral */
+
+  --color-background: #f8f8f8;
+  --color-surface: #ffffff;
+
+  --color-text: #333333;
+  --color-text-light: #666666;
+
+  --color-border: #e5e5e5;
+
+  --color-error: #c62828;
+  --color-success: #2e7d32;
+
+  /* Layout */
+
+  --container-width: 1200px;
+
+  /* Radius */
+
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 20px;
+
+  /* Shadow */
+
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.08);
+  --shadow-md: 0 6px 18px rgba(0, 0, 0, 0.12);
+
+  /* Animation */
+
+  --transition: 0.25s ease;
+}
+
+/* =========================
+   Base
+========================= */
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  background: var(--color-background);
+  color: var(--color-text);
+  line-height: 1.6;
+}
+
+/* =========================
+   Typography
+========================= */
+
+h1,
+h2,
+h3,
+h4 {
+  line-height: 1.2;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+ul {
+  list-style: none;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+#root {
+  min-height: 100vh;
+}
