@@ -1,12 +1,19 @@
+import { Routes, Route } from "react-router-dom";
 
+import MainLayout from "./layout/MainLayout";
+
+import Home from "./Pages/Home";
+import Booking from "./Pages/Booking";
 
 function App() {
-
   return (
-    <>
-      <h1>Little Lemon</h1>
-    </>
-  )
+    <Routes>
+      <Route element={<MainLayout />}>
+        <Route path="/" element={<Home />} />
+        <Route path="/booking" element={<Booking />} />
+      </Route>
+    </Routes>
+  );
 }
 
-export default App
+export default App;
