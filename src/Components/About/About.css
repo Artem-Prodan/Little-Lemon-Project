@@ -1,0 +1,15 @@
+.about {
+  padding: 60px 0;
+}
+
+.about__title {
+  font-size: 28px;
+  margin-bottom: 12px;
+  color: var(--color-primary);
+}
+
+.about__text {
+  max-width: 600px;
+  color: var(--color-text-light);
+  line-height: 1.6;
+}

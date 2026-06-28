@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import "./Specials.css";
 
 const dishes = [
@@ -25,7 +26,9 @@ export default function Specials() {
   return (
     <section className="specials">
       <div className="container">
-        <h2 className="specials__title">This Week Specials</h2>
+        <div className="specials__header">
+          <h2>This Week Specials</h2>
+        </div>
 
         <div className="specials__grid">
           {dishes.map((dish) => (
@@ -36,7 +39,9 @@ export default function Specials() {
                 <span className="card__price">${dish.price}</span>
               </div>
 
-              <button className="card__btn">Order</button>
+              <Link to="/booking" className="card__btn">
+                Order
+              </Link>
             </div>
           ))}
         </div>

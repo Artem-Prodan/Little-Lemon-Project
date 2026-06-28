@@ -48,6 +48,8 @@
 }
 
 .card__btn {
+  display: inline-block;
+  text-align: center;
   margin-top: 12px;
   padding: 10px;
   border: none;
@@ -56,6 +58,8 @@
   font-weight: bold;
   cursor: pointer;
   transition: var(--transition);
+  color: black;
+  text-decoration: none;
 }
 
 .card__btn:hover {
