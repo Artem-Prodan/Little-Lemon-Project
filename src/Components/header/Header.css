@@ -18,14 +18,21 @@
 
 .nav {
   display: flex;
-  gap: 20px;
+  gap: 18px;
 }
 
-.nav a {
+.nav__link {
   color: var(--color-text);
+  text-decoration: none;
   transition: var(--transition);
 }
 
-.nav a:hover {
+.nav__link:hover {
   color: var(--color-primary);
+}
+
+/* active route */
+.nav__link.active {
+  color: var(--color-primary);
+  font-weight: bold;
 }
