@@ -15,6 +15,20 @@ export default function Booking() {
   });
 
   const [errors, setErrors] = useState({});
+  
+  // load from storage
+  const [bookings, setBookings] = useState(() => {
+  try {
+    const saved = localStorage.getItem("bookings");
+    return saved ? JSON.parse(saved) : [];
+  } catch {
+    return [];
+  }
+});
+
+  function saveToStorage(data) {
+    localStorage.setItem("bookings", JSON.stringify(data));
+  }
 
   function handleChange(e) {
     const { name, value } = e.target;
@@ -24,7 +38,6 @@ export default function Booking() {
       [name]: name === "guests" ? Number(value) : value,
     }));
 
-    // clear error on change (UX improvement)
     setErrors((prev) => ({
       ...prev,
       [name]: "",
@@ -57,10 +70,27 @@ export default function Booking() {
       return;
     }
 
+    const newBooking = {
+      id: Date.now(),
+      dish: dish || null,
+      ...form,
+    };
+
+    const updated = [...bookings, newBooking];
+
+    setBookings(updated);
+    saveToStorage(updated);
+
+    setForm({ date: "", time: "", guests: 1 });
     setErrors({});
 
-    console.log("Booking submitted:", form);
     alert("Booking confirmed!");
+  }
+
+  function handleDelete(id) {
+    const updated = bookings.filter((b) => b.id !== id);
+    setBookings(updated);
+    saveToStorage(updated);
   }
 
   return (
@@ -127,6 +157,30 @@ export default function Booking() {
             Confirm
           </button>
         </form>
+
+        {/* BOOKINGS LIST */}
+        {bookings.length > 0 && (
+          <div className="booking__list">
+            <h2>Your bookings</h2>
+
+            {bookings.map((b) => (
+              <div key={b.id} className="booking__card">
+                <p>
+                  <strong>{b.date}</strong> at {b.time}
+                </p>
+                <p>Guests: {b.guests}</p>
+                {b.dish && <p>Dish: {b.dish}</p>}
+
+                <button
+                  className="booking__delete"
+                  onClick={() => handleDelete(b.id)}
+                >
+                  Cancel
+                </button>
+              </div>
+            ))}
+          </div>
+        )}
       </div>
     </section>
   );

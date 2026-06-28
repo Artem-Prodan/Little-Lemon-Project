@@ -25,10 +25,6 @@ export default function Header() {
           </NavLink>
 
           <NavLink to="/" className="nav__link">
-            Order Online
-          </NavLink>
-
-          <NavLink to="/" className="nav__link">
             Login
           </NavLink>
         </nav>

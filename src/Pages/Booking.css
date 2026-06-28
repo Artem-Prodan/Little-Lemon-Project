@@ -57,3 +57,30 @@
   color: var(--color-primary);
   font-weight: 500;
 }
+
+.booking__list {
+  margin-top: 40px;
+}
+
+.booking__card {
+  background: var(--color-surface);
+  border-radius: var(--radius-md);
+  padding: 12px;
+  margin-top: 10px;
+  box-shadow: var(--shadow-sm);
+}
+
+.booking__delete {
+  margin-top: 10px;
+  padding: 6px 10px;
+  border: none;
+  border-radius: var(--radius-sm);
+  background: var(--color-error);
+  color: white;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.booking__delete:hover {
+  opacity: 0.9;
+}
