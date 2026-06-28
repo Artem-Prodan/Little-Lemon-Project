@@ -1,0 +1,28 @@
+.bookings {
+  padding: 60px 0;
+}
+
+.bookings__list {
+  display: grid;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.bookings__card {
+  background: var(--color-surface);
+  padding: 14px;
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.bookings__card button {
+  background: var(--color-error);
+  color: white;
+  border: none;
+  padding: 6px 10px;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+}

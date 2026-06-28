@@ -1,4 +1,3 @@
-import { NavLink } from "react-router-dom";
 import "./Header.css";
 
 export default function Header() {
@@ -8,25 +7,29 @@ export default function Header() {
         <div className="logo">Little Lemon</div>
 
         <nav className="nav">
-          <NavLink to="/" className="nav__link">
+          <a href="/" className="nav__link">
             Home
-          </NavLink>
+          </a>
 
-          <NavLink to="/" className="nav__link">
+          <a href="#about" className="nav__link">
             About
-          </NavLink>
+          </a>
 
-          <NavLink to="/" className="nav__link">
+          <a href="#menu" className="nav__link">
             Menu
-          </NavLink>
+          </a>
 
-          <NavLink to="/booking" className="nav__link">
+          <a href="/reservation" className="nav__link">
             Reservations
-          </NavLink>
+          </a>
 
-          <NavLink to="/" className="nav__link">
+          <a href="/bookings" className="nav__link">
+            My Bookings
+          </a>
+
+          <a href="/" className="nav__link">
             Login
-          </NavLink>
+          </a>
         </nav>
       </div>
     </header>

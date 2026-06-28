@@ -10,7 +10,7 @@ export default function Hero() {
           <h1>Little Lemon</h1>
           <p>We are a family owned Mediterranean restaurant.</p>
 
-          <Link to="/booking" className="hero__button">
+          <Link to="/reservation" className="hero__button">
             Reserve a table
           </Link>
         </div>

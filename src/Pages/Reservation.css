@@ -84,3 +84,20 @@
 .booking__delete:hover {
   opacity: 0.9;
 }
+
+.booking__success {
+  text-align: center;
+  padding: 40px;
+  background: var(--color-surface);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-md);
+}
+
+.booking__success button {
+  margin-top: 20px;
+  padding: 10px 16px;
+  border: none;
+  border-radius: var(--radius-sm);
+  background: var(--color-secondary);
+  cursor: pointer;
+}

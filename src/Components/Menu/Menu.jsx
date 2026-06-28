@@ -1,18 +1,18 @@
+import "./Menu.css";
 import { Link } from "react-router-dom";
-import "./Specials.css";
-import { specialsDishes } from "../../data/specials";
+import { menuDishes } from "../../data/menu";
 
-export default function Specials() {
+export default function Menu() {
   return (
-    <section className="specials">
+    <section id="menu" className="menu">
       <div className="container">
-        <div className="specials__header">
-          <h2>This Week Specials</h2>
-          <p>Limited-time dishes you won't find in our regular menu</p>
+        <div className="menu__header">
+          <h2>Our Menu</h2>
+          <p>Classic Mediterranean dishes</p>
         </div>
 
-        <div className="specials__grid">
-          {specialsDishes.map((dish) => (
+        <div className="menu__grid">
+          {menuDishes.map((dish) => (
             <div key={dish.id} className="card">
               <div className="card__content">
                 <h3>{dish.title}</h3>
@@ -25,7 +25,7 @@ export default function Specials() {
                 state={{ dish: dish.title }}
                 className="card__btn"
               >
-                Order Special
+                Order
               </Link>
             </div>
           ))}

@@ -1,8 +1,8 @@
 import { useState } from "react";
-import "./Booking.css";
+import "./Reservation.css";
 import { useLocation } from "react-router-dom";
 
-export default function Booking() {
+export default function Reservation() {
   const location = useLocation();
   const dish = location.state?.dish;
 
@@ -15,20 +15,8 @@ export default function Booking() {
   });
 
   const [errors, setErrors] = useState({});
-  
-  // load from storage
-  const [bookings, setBookings] = useState(() => {
-  try {
-    const saved = localStorage.getItem("bookings");
-    return saved ? JSON.parse(saved) : [];
-  } catch {
-    return [];
-  }
-});
-
-  function saveToStorage(data) {
-    localStorage.setItem("bookings", JSON.stringify(data));
-  }
+  const [isSuccess, setIsSuccess] = useState(false);
+  const [lastBooking, setLastBooking] = useState(null);
 
   function handleChange(e) {
     const { name, value } = e.target;
@@ -76,21 +64,47 @@ export default function Booking() {
       ...form,
     };
 
-    const updated = [...bookings, newBooking];
+    const saved = localStorage.getItem("bookings");
+    const parsed = saved ? JSON.parse(saved) : [];
 
-    setBookings(updated);
-    saveToStorage(updated);
+    const updated = [...parsed, newBooking];
+
+    localStorage.setItem("bookings", JSON.stringify(updated));
+
+    setLastBooking(newBooking);
+    setIsSuccess(true);
 
     setForm({ date: "", time: "", guests: 1 });
     setErrors({});
-
-    alert("Booking confirmed!");
   }
 
-  function handleDelete(id) {
-    const updated = bookings.filter((b) => b.id !== id);
-    setBookings(updated);
-    saveToStorage(updated);
+  function handleNewBooking() {
+    setIsSuccess(false);
+    setLastBooking(null);
+  }
+
+  if (isSuccess && lastBooking) {
+    return (
+      <section className="booking">
+        <div className="container">
+          <div className="booking__success">
+            <h1>Booking confirmed!</h1>
+
+            <p><strong>Date:</strong> {lastBooking.date}</p>
+            <p><strong>Time:</strong> {lastBooking.time}</p>
+            <p><strong>Guests:</strong> {lastBooking.guests}</p>
+
+            {lastBooking.dish && (
+              <p><strong>Dish:</strong> {lastBooking.dish}</p>
+            )}
+
+            <button onClick={handleNewBooking}>
+              Make another booking
+            </button>
+          </div>
+        </div>
+      </section>
+    );
   }
 
   return (
@@ -148,39 +162,13 @@ export default function Booking() {
               onChange={handleChange}
               className={errors.guests ? "input-error" : ""}
             />
-            {errors.guests && (
-              <span className="error">{errors.guests}</span>
-            )}
+            {errors.guests && <span className="error">{errors.guests}</span>}
           </label>
 
           <button type="submit" disabled={!isFormValid}>
             Confirm
           </button>
         </form>
-
-        {/* BOOKINGS LIST */}
-        {bookings.length > 0 && (
-          <div className="booking__list">
-            <h2>Your bookings</h2>
-
-            {bookings.map((b) => (
-              <div key={b.id} className="booking__card">
-                <p>
-                  <strong>{b.date}</strong> at {b.time}
-                </p>
-                <p>Guests: {b.guests}</p>
-                {b.dish && <p>Dish: {b.dish}</p>}
-
-                <button
-                  className="booking__delete"
-                  onClick={() => handleDelete(b.id)}
-                >
-                  Cancel
-                </button>
-              </div>
-            ))}
-          </div>
-        )}
       </div>
     </section>
   );
