@@ -15,6 +15,8 @@
 ========================= */
 
 :root {
+  color-scheme: light;
+
   /* Brand */
 
   --color-primary: #495e57;
@@ -67,6 +69,14 @@ body {
   background: var(--color-background);
   color: var(--color-text);
   line-height: 1.6;
+
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+::selection {
+  background: var(--color-secondary);
+  color: var(--color-text);
 }
 
 /* =========================
@@ -94,6 +104,7 @@ input,
 select,
 textarea {
   font: inherit;
+  color: inherit;
 }
 
 button {
@@ -107,4 +118,9 @@ img {
 
 #root {
   min-height: 100vh;
+}
+
+.container {
+  width: min(100% - 2rem, var(--container-width));
+  margin-inline: auto;
 }

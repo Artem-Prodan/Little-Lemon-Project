@@ -2,8 +2,8 @@ import { Routes, Route } from "react-router-dom";
 
 import MainLayout from "./layout/MainLayout";
 
-import Home from "./Pages/Home";
-import Booking from "./Pages/Booking";
+import Home from "./pages/Home";
+import Booking from "./pages/Booking";
 
 function App() {
   return (
