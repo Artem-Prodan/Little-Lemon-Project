@@ -1,7 +1,14 @@
 import { useState } from "react";
 import "./Booking.css";
+import { useLocation } from "react-router-dom";
 
 export default function Booking() {
+
+  const location = useLocation();
+  //const from = location.state?.from;
+  const dish = location.state?.dish;
+
+
   const [form, setForm] = useState({
     date: "",
     time: "",
@@ -50,6 +57,12 @@ export default function Booking() {
     <section className="booking">
       <div className="container">
         <h1>Book a table</h1>
+
+        {dish && (
+        <p className="booking__context">
+          You are booking: <strong>{dish}</strong>
+        </p>
+      )}
 
         <form className="booking__form" onSubmit={handleSubmit}>
           <label>

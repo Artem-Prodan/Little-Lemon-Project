@@ -51,3 +51,9 @@
   opacity: 0.5;
   cursor: not-allowed;
 }
+
+.booking__context {
+  margin-top: 10px;
+  color: var(--color-primary);
+  font-weight: 500;
+}

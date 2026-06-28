@@ -39,7 +39,11 @@ export default function Specials() {
                 <span className="card__price">${dish.price}</span>
               </div>
 
-              <Link to="/booking" className="card__btn">
+              <Link
+                to="/booking"
+                state={{ from: "specials", dish: dish.title }}
+                className="card__btn"
+              >
                 Order
               </Link>
             </div>
