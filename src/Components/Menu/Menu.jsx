@@ -1,6 +1,6 @@
 import "./Menu.css";
-import { Link } from "react-router-dom";
 import { menuDishes } from "../../data/menu";
+import DishCard from "../DishCard/DishCard";
 
 export default function Menu() {
   return (
@@ -13,21 +13,11 @@ export default function Menu() {
 
         <div className="menu__grid">
           {menuDishes.map((dish) => (
-            <div key={dish.id} className="card">
-              <div className="card__content">
-                <h3>{dish.title}</h3>
-                <p className="card__desc">{dish.description}</p>
-                <span className="card__price">${dish.price}</span>
-              </div>
-
-              <Link
-                to="/reservation"
-                state={{ dish: dish.title }}
-                className="card__btn"
-              >
-                Order
-              </Link>
-            </div>
+            <DishCard
+              key={dish.id}
+              dish={dish}
+              buttonText="Order"
+            />
           ))}
         </div>
       </div>

@@ -1,10 +1,15 @@
 import "./Header.css";
+import logo from "../../assets/icons/logo1.png";
+import { Link } from "react-router-dom";
 
 export default function Header() {
   return (
     <header className="header">
       <div className="container header__inner">
-        <div className="logo">Little Lemon</div>
+
+        <Link to="/" className="logo">
+          <img src={logo} alt="Little Lemon" />
+        </Link>
 
         <nav className="nav">
           <a href="/" className="nav__link">

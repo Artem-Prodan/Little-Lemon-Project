@@ -1,5 +1,10 @@
 .header {
-  background: var(--color-surface);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+
+  backdrop-filter: blur(8px);
+  background: rgba(255, 255, 255, 0.9);
   box-shadow: var(--shadow-sm);
 }
 
@@ -11,14 +16,25 @@
 }
 
 .logo {
-  font-weight: bold;
-  font-size: 20px;
-  color: var(--color-primary);
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.logo img {
+  height: 42px;
+  width: auto;
+  object-fit: contain;
+  transition: var(--transition);
+}
+
+.logo img:hover {
+  transform: scale(1.05);
 }
 
 .nav {
   display: flex;
-  gap: 18px;
+  gap: 24px;
 }
 
 .nav__link {

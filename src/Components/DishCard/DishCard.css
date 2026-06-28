@@ -1,0 +1,153 @@
+.card {
+  position: relative;
+
+  margin-top: 70px;
+  padding-top: 70px;
+
+  background: var(--color-surface);
+
+  border-radius: var(--radius-md);
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  overflow: visible;
+
+  box-shadow: var(--shadow-sm);
+
+  transition:
+    transform .25s,
+    box-shadow .25s;
+}
+
+/* yellow accent */
+
+.card::before {
+  content: "";
+
+  position: absolute;
+
+  top: 0;
+  left: 0;
+
+  width: 100%;
+  height: 6px;
+
+  background: var(--color-secondary);
+
+  border-radius: var(--radius-md) var(--radius-md) 0 0;
+}
+
+.card:hover {
+  transform: translateY(-8px);
+
+  box-shadow: 0 14px 32px rgba(0,0,0,.16);
+}
+
+/* image */
+
+.card__image {
+  position: absolute;
+
+  top: -58px;
+  left: 28px;
+}
+
+.card__image img {
+  width: 115px;
+  height: 115px;
+
+  object-fit: cover;
+
+  border-radius: 50%;
+
+  border: 6px solid white;
+
+  box-shadow: var(--shadow-md);
+
+  transition: transform .3s;
+}
+
+.card:hover .card__image img {
+  transform: scale(1.08) rotate(2deg);
+}
+
+/* content */
+
+.card__content {
+  padding: 22px;
+}
+
+.card__content h3 {
+  font-size: 22px;
+
+  margin-bottom: 10px;
+
+  color: var(--color-text);
+}
+
+.card__desc {
+  font-size: 14px;
+
+  line-height: 1.6;
+
+  color: var(--color-text-light);
+
+  margin-bottom: 20px;
+}
+
+.card__price {
+  display: inline-block;
+
+  font-size: 22px;
+
+  font-weight: 700;
+
+  color: var(--color-primary);
+}
+
+/* button */
+
+.card__btn {
+  width: calc(100% - 32px);
+
+  margin: 0 16px 16px;
+
+  padding: 12px;
+
+  text-align: center;
+
+  border-radius: 999px;
+
+  background: var(--color-secondary);
+
+  color: black;
+
+  font-weight: 700;
+
+  text-decoration: none;
+
+  transition:
+    transform .2s,
+    box-shadow .2s,
+    opacity .2s;
+}
+
+.card__btn:hover {
+  transform: translateY(-2px);
+
+  box-shadow: var(--shadow-sm);
+
+  opacity: .80;
+}
+
+/* specials */
+
+.card--special::before {
+  background: linear-gradient(
+    90deg,
+    var(--color-secondary),
+    #ffd84d
+  );
+}
