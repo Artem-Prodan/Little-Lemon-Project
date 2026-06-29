@@ -1,8 +1,9 @@
 import { useState } from "react";
 import "./Bookings.css";
+import { Link } from "react-router-dom";
 
 export default function Bookings() {
-  
+
   const [bookings, setBookings] = useState(() => {
   try {
     const saved = localStorage.getItem("bookings");
@@ -23,7 +24,13 @@ export default function Bookings() {
       <section className="bookings">
         <div className="container">
           <h1>Your bookings</h1>
-          <p>No bookings yet.</p>
+          <div className="bookings__empty">
+            <h2>No bookings yet</h2>
+            <p>Start by reserving a table in our restaurant.</p>
+            <Link to="/reservation" className="bookings__cta">
+              Make a reservation
+            </Link>
+          </div>
         </div>
       </section>
     );

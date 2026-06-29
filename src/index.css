@@ -65,6 +65,8 @@ html {
 }
 
 body {
+  margin: 0;
+  height: 100%;
   font-family: Arial, Helvetica, sans-serif;
   background: var(--color-background);
   color: var(--color-text);
@@ -123,4 +125,14 @@ img {
 .container {
   width: min(100% - 2rem, var(--container-width));
   margin-inline: auto;
+}
+
+.app-layout {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.app-main {
+  flex: 1;
 }
