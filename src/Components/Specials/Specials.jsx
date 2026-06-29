@@ -7,7 +7,7 @@ export default function Specials() {
     <section id="specials" className="specials">
       <div className="container">
         <div className="specials__header">
-          <h2>This Week Specials</h2>
+          <h2>This Month Specials</h2>
           <p>Limited-time dishes you won't find in our regular menu</p>
         </div>
 

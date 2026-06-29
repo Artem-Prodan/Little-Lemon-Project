@@ -26,25 +26,20 @@ export default function Reservation() {
       [name]: name === "guests" ? Number(value) : value,
     }));
 
-    setErrors((prev) => ({
-      ...prev,
-      [name]: "",
-    }));
+    setErrors((prev) => ({ ...prev, [name]: "" }));
   }
 
   function validate() {
-    const newErrors = {};
-
+    const err = {};
     const today = new Date().toISOString().split("T")[0];
 
-    if (!form.date) newErrors.date = "Date is required";
-    if (form.date && form.date < today)
-      newErrors.date = "You can't select past date";
+    if (!form.date) err.date = "Select date";
+    if (form.date && form.date < today) err.date = "Past date not allowed";
 
-    if (!form.time) newErrors.time = "Time is required";
-    if (form.guests < 1) newErrors.guests = "At least 1 guest required";
+    if (!form.time) err.time = "Select time";
+    if (form.guests < 1) err.guests = "Min 1 guest";
 
-    return newErrors;
+    return err;
   }
 
   const isFormValid = Object.keys(validate()).length === 0;
@@ -52,9 +47,9 @@ export default function Reservation() {
   function handleSubmit(e) {
     e.preventDefault();
 
-    const validationErrors = validate();
-    if (Object.keys(validationErrors).length > 0) {
-      setErrors(validationErrors);
+    const err = validate();
+    if (Object.keys(err).length) {
+      setErrors(err);
       return;
     }
 
@@ -67,20 +62,15 @@ export default function Reservation() {
     const saved = localStorage.getItem("bookings");
     const parsed = saved ? JSON.parse(saved) : [];
 
-    const updated = [...parsed, newBooking];
-
-    localStorage.setItem("bookings", JSON.stringify(updated));
+    localStorage.setItem(
+      "bookings",
+      JSON.stringify([...parsed, newBooking])
+    );
 
     setLastBooking(newBooking);
     setIsSuccess(true);
 
     setForm({ date: "", time: "", guests: 1 });
-    setErrors({});
-  }
-
-  function handleNewBooking() {
-    setIsSuccess(false);
-    setLastBooking(null);
   }
 
   if (isSuccess && lastBooking) {
@@ -88,17 +78,18 @@ export default function Reservation() {
       <section className="booking">
         <div className="container">
           <div className="booking__success">
-            <h1>Booking confirmed!</h1>
+            <div className="success__badge">✓</div>
 
-            <p><strong>Date:</strong> {lastBooking.date}</p>
-            <p><strong>Time:</strong> {lastBooking.time}</p>
-            <p><strong>Guests:</strong> {lastBooking.guests}</p>
+            <h1>Booking confirmed</h1>
 
-            {lastBooking.dish && (
-              <p><strong>Dish:</strong> {lastBooking.dish}</p>
-            )}
+            <div className="success__card">
+              <p><strong>Date:</strong> {lastBooking.date}</p>
+              <p><strong>Time:</strong> {lastBooking.time}</p>
+              <p><strong>Guests:</strong> {lastBooking.guests}</p>
+              {lastBooking.dish && <p><strong>Dish:</strong> {lastBooking.dish}</p>}
+            </div>
 
-            <button onClick={handleNewBooking}>
+            <button onClick={() => setIsSuccess(false)}>
               Make another booking
             </button>
           </div>
@@ -110,65 +101,82 @@ export default function Reservation() {
   return (
     <section className="booking">
       <div className="container">
-        <h1>Book a table</h1>
 
-        {dish && (
-          <p className="booking__context">
-            You are booking: <strong>{dish}</strong>
-          </p>
-        )}
+        <div className="booking__layout">
 
-        <form className="booking__form" onSubmit={handleSubmit}>
-          <label>
-            Date
-            <input
-              type="date"
-              name="date"
-              value={form.date}
-              min={new Date().toISOString().split("T")[0]}
-              onChange={handleChange}
-              className={errors.date ? "input-error" : ""}
-            />
-            {errors.date && <span className="error">{errors.date}</span>}
-          </label>
+          {/* FORM */}
+          <div className="booking__card">
+            <h1>Book a table</h1>
 
-          <label>
-            Time
-            <select
-              name="time"
-              value={form.time}
-              onChange={handleChange}
-              className={errors.time ? "input-error" : ""}
-            >
-              <option value="">Select time</option>
-              {availableTimes.map((t) => (
-                <option key={t} value={t}>
-                  {t}
-                </option>
-              ))}
-            </select>
+            {dish && (
+              <div className="booking__context">
+                Booking: <strong>{dish}</strong>
+              </div>
+            )}
 
-            {errors.time && <span className="error">{errors.time}</span>}
-          </label>
+            <form className="booking__form" onSubmit={handleSubmit}>
+              <label>
+                Date
+                <input
+                  type="date"
+                  name="date"
+                  value={form.date}
+                  min={new Date().toISOString().split("T")[0]}
+                  onChange={handleChange}
+                  className={errors.date ? "input-error" : ""}
+                />
+                {errors.date && <span className="error">{errors.date}</span>}
+              </label>
 
-          <label>
-            Guests
-            <input
-              type="number"
-              name="guests"
-              min="1"
-              max="10"
-              value={form.guests}
-              onChange={handleChange}
-              className={errors.guests ? "input-error" : ""}
-            />
-            {errors.guests && <span className="error">{errors.guests}</span>}
-          </label>
+              <label>
+                Time
+                <select
+                  name="time"
+                  value={form.time}
+                  onChange={handleChange}
+                >
+                  <option value="">Select time</option>
+                  {availableTimes.map((t) => (
+                    <option key={t} value={t}>{t}</option>
+                  ))}
+                </select>
+                {errors.time && <span className="error">{errors.time}</span>}
+              </label>
 
-          <button type="submit" disabled={!isFormValid}>
-            Confirm
-          </button>
-        </form>
+              <label>
+                Guests
+                <input
+                  type="number"
+                  name="guests"
+                  min="1"
+                  max="10"
+                  value={form.guests}
+                  onChange={handleChange}
+                />
+                {errors.guests && (
+                  <span className="error">{errors.guests}</span>
+                )}
+              </label>
+
+              <button disabled={!isFormValid}>
+                Confirm reservation
+              </button>
+            </form>
+          </div>
+
+          {/* LIVE PREVIEW */}
+          <div className="booking__preview">
+            <h3>Summary</h3>
+
+            <div className="preview__card">
+              <p>{form.date || "Pick a date"}</p>
+              <p>{form.time || "Pick a time"}</p>
+              <p>{form.guests} guest(s)</p>
+              {dish && <p>{dish}</p>}
+            </div>
+          </div>
+
+        </div>
       </div>
     </section>
   );
